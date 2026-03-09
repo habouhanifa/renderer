@@ -6,5 +6,11 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 5173,
+    watch: {
+      // Polling is required in Docker bind mounts where inotify events
+      // don't propagate reliably from the host filesystem.
+      usePolling: true,
+      interval: 500,
+    },
   },
 })
