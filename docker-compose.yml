@@ -1,0 +1,27 @@
+services:
+  # ── Development ─────────────────────────────────────────────────────────────
+  # Hot-reload Vite dev server. src/components/ is volume-mounted so that
+  # dropping a new .jsx file instantly triggers HMR without rebuilding.
+  dev:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules        # keep container node_modules isolated
+    environment:
+      - NODE_ENV=development
+
+  # ── Production ──────────────────────────────────────────────────────────────
+  # Multi-stage Docker build → optimised Nginx static server.
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
