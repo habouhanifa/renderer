@@ -20,8 +20,8 @@ function ComponentCard({ descriptor }) {
 
   return (
     <div className="flex flex-col rounded-xl border border-gray-700 bg-gray-900 overflow-hidden shadow-lg hover:border-indigo-500 transition-colors">
-      {/* Live preview area */}
-      <div className="flex-1 bg-gray-800 p-4 min-h-[140px] flex items-center justify-center overflow-hidden">
+      {/* Live preview area — fixed height so all cards are uniform */}
+      <div className="h-48 bg-gray-800 p-4 flex items-center justify-center overflow-hidden">
         {previewError ? (
           <span className="text-gray-500 text-sm italic">Preview unavailable</span>
         ) : mod ? (
